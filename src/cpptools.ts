@@ -251,6 +251,9 @@ export function getIntelliSenseMode(cptVersion: cpptools.Version, compilerPath: 
     }
     const canUseArm = (cptVersion >= cpptools.Version.v4);
     const compilerName = path.basename(compilerPath || "").toLocaleLowerCase();
+    if (lang === 'CUDA') {
+        return 'msvc-x64';
+    } else if (compilerName === 'cl.exe') {
     if (compilerName === 'cl.exe') {
         const clArch = path.basename(path.dirname(compilerPath)).toLocaleLowerCase();
         switch (clArch) {
